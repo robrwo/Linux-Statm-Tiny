@@ -27,6 +27,8 @@ This distribution requires the following modules:
 
 =item * L<ExtUtils::MakeMaker>
 
+=item * L<Fcntl>
+
 =item * L<Moo>
 
 =item * L<Test::More>
