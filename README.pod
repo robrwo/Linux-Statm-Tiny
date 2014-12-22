@@ -21,17 +21,13 @@ L<How to install CPAN modules|http://www.cpan.org/modules/INSTALL.html>.
 
 =head2 Required Modules
 
+This distribution requires Perl v5.8.0.
+
 This distribution requires the following modules:
 
 =over 4
 
-=item * L<ExtUtils::MakeMaker>
-
-=item * L<Fcntl>
-
 =item * L<Moo>
-
-=item * L<Test::More>
 
 =item * L<Types::Standard>
 
