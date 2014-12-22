@@ -1,0 +1,65 @@
+=head1 NAME
+
+Linux::Statm::Tiny - simple access to Linux /proc/../statm
+
+=head1 VERSION
+
+0.0100
+
+=head1 SYNOPSIS
+
+  use Linux::Statm::Tiny;
+
+  my $stats = Linux::Statm::Tiny->new( pid => $$ );
+
+  my $size = $stats->size;
+
+=head1 INSTALLATION
+
+See
+L<How to install CPAN modules|http://www.cpan.org/modules/INSTALL.html>.
+
+=head2 Required Modules
+
+This distribution requires the following modules:
+
+=over 4
+
+=item * L<ExtUtils::MakeMaker>
+
+=item * L<Moo>
+
+=item * L<Test::More>
+
+=item * L<Types::Standard>
+
+=back
+
+=head1 RECENT CHANGES
+
+=over 4
+
+=item * 
+
+Initial prototype.
+
+=back
+
+See the F<Changes> file for a longer revision history.
+
+=head1 DESCRIPTION
+
+This class returns the Linux memory stats from F</proc/$pid/statm>.
+
+=head1 SEE ALSO
+
+L<proc(5)>.
+
+=head1 AUTHOR
+
+Robert Rothenberg C<< rrwo@thermeon.com >>
+
+=head1 COPYRIGHT
+
+Copyright 2014, Thermeon Worldwide, PLC.
+
