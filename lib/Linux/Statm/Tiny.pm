@@ -2,6 +2,7 @@ package Linux::Statm::Tiny;
 
 use Moo;
 
+use Fcntl qw/ O_RDONLY /;
 use Types::Standard qw/ ArrayRef Int /;
 
 {
@@ -71,8 +72,8 @@ has statm => (
 sub _build_statm {
     my ($self) = @_;
     my $pid = $self->pid;
-    open my $fh, '<', "/proc/${pid}/statm"
-        or die "Unable to open /proc/${pid}/statm";
+    sysopen( my $fh, "/proc/${pid}/statm", O_RDONLY )
+        or die "Unable to open /proc/${pid}/statm: $!";
     chomp(my $raw = <$fh>);
     close $fh;
     [ split / /, $raw ];
