@@ -4,7 +4,7 @@ Linux::Statm::Tiny - simple access to Linux /proc/../statm
 
 =head1 VERSION
 
-0.0200
+0.0201
 
 =head1 SYNOPSIS
 
@@ -35,13 +35,13 @@ This distribution requires the following modules:
 
 =head1 RECENT CHANGES
 
-=head2 Enhancements
+=head2 Other Changes
 
 =over 4
 
 =item * 
 
-Added vss and rss as aliases for size and resident.
+Test prerequisties are explicitly in the test phase.
 
 =back
 

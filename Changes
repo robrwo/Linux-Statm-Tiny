@@ -1,6 +1,6 @@
-Revision history for {{$dist->name}}
+Revision history for Linux-Statm-Tiny
 
-{{$NEXT}}
+0.0201    2015-01-05 18:19:39+00:00 Europe/London
   [Other Changes]
   - Test prerequisties are explicitly in the test phase.
 
