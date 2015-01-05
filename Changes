@@ -1,4 +1,4 @@
-Revision history for Linux-Statm-Tiny
+Revision history for {{$dist->name}}
 
 {{$NEXT}}
   - Initial prototype.
