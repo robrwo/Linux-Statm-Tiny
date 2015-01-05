@@ -21,4 +21,7 @@ foreach my $key (keys %stats) {
     is $stat->$key, $stat->statm->[$stats{$key}], $key;
     }
 
+is $stat->vss, $stat->size, 'vss';
+is $stat->rss, $stat->resident, 'rss';
+
 done_testing;

@@ -6,7 +6,7 @@ use Fcntl qw/ O_RDONLY /;
 use Types::Standard qw/ ArrayRef Int /;
 
 {
-    $Linux::Statm::Tiny::VERSION = '0.0100'
+    $Linux::Statm::Tiny::VERSION = '0.0200'
 }
 
 =head1 NAME
@@ -81,9 +81,13 @@ sub _build_statm {
 
 =head2 C<size>
 
+=head2 c<vss>
+
 Total program size, in pages.
 
 =head2 C<resident>
+
+=head2 C<rss>
 
 Resident set size (RSS), in pages.
 
@@ -126,6 +130,14 @@ foreach my $attr (keys %stats) {
         default  => sub { shift->statm->[$stats{$attr}] },
         init_arg => undef,
         );
+    }
+
+sub vss {
+    shift->size(@_);
+    }
+
+sub rss {
+    shift->resident(@_);
     }
 
 =for readme continue

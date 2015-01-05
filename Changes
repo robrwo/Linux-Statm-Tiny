@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  [Enhancements]
+  - Added vss and rss as aliases for size and resident.
 
 0.0100    2015-01-05 12:18:43+00:00 Europe/London
   - Initial prototype.
