@@ -1,6 +1,6 @@
-Revision history for {{$dist->name}}
+Revision history for Linux-Statm-Tiny
 
-{{$NEXT}}
+0.0200    2015-01-05 15:36:32+00:00 Europe/London
   [Enhancements]
   - Added vss and rss as aliases for size and resident.
 
