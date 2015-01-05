@@ -1,4 +1,6 @@
-Revision history for Linux-Statm-Tiny
+Revision history for {{$dist->name}}
+
+{{$NEXT}}
 
 0.0100    2015-01-05 12:18:43+00:00 Europe/London
   - Initial prototype.
