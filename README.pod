@@ -4,7 +4,7 @@ Linux::Statm::Tiny - simple access to Linux /proc/../statm
 
 =head1 VERSION
 
-0.0201
+0.0300
 
 =head1 SYNOPSIS
 
@@ -35,53 +35,13 @@ This distribution requires the following modules:
 
 =head1 RECENT CHANGES
 
-=head2 Documentation
+=head2 Other Changes
 
 =over 4
 
 =item * 
 
-Fixed typo in POD markup.
-
-=item * 
-
-Bumped copyright year.
-
-=back
-
-=head2 Enhancements
-
-=over 4
-
-=item * 
-
-Added vsz as alias for size.
-
-=item * 
-
-Used proper aliases instead of wrapper methods.
-
-=item * 
-
-Added *_pages aliases.
-
-=item * 
-
-Aded page_size attribute.
-
-=item * 
-
-Added *_bytes and *_kb methods.
-
-=back
-
-=head2 Incompatabile Changes
-
-=over 4
-
-=item * 
-
-Removed vss alias, which is a typo. Use vsz.
+Test prerequisties are explicitly in the test phase.
 
 =back
 
