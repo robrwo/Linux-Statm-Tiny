@@ -1,6 +1,6 @@
-Revision history for {{$dist->name}}
+Revision history for Linux-Statm-Tiny
 
-{{$NEXT}}
+0.0201    2015-01-12 11:26:08+00:00 Europe/London
   [Documentation]
   - Fixed typo in POD markup.
 

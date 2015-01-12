@@ -35,13 +35,53 @@ This distribution requires the following modules:
 
 =head1 RECENT CHANGES
 
-=head2 Other Changes
+=head2 Documentation
 
 =over 4
 
 =item * 
 
-Test prerequisties are explicitly in the test phase.
+Fixed typo in POD markup.
+
+=item * 
+
+Bumped copyright year.
+
+=back
+
+=head2 Enhancements
+
+=over 4
+
+=item * 
+
+Added vsz as alias for size.
+
+=item * 
+
+Used proper aliases instead of wrapper methods.
+
+=item * 
+
+Added *_pages aliases.
+
+=item * 
+
+Aded page_size attribute.
+
+=item * 
+
+Added *_bytes and *_kb methods.
+
+=back
+
+=head2 Incompatabile Changes
+
+=over 4
+
+=item * 
+
+Removed vss alias, which is a typo. Use vsz.
 
 =back
 
@@ -61,7 +101,7 @@ Robert Rothenberg C<< rrwo@thermeon.com >>
 
 =head1 COPYRIGHT
 
-Copyright 2014, Thermeon Worldwide, PLC.
+Copyright 2014-2015, Thermeon Worldwide, PLC.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
