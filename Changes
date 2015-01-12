@@ -1,6 +1,13 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  [Documentation]
+  - Fixed typo in POD markup.
+
+  [Enhancements]
+  - Added vsz as alias for size. (vss is actually a typo.)
+
+  - Used proper aliases instead of wrapper methods.
 
 0.0201    2015-01-05 18:19:39+00:00 Europe/London
   [Other Changes]
