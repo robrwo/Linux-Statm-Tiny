@@ -57,6 +57,23 @@ has pid => (
     default => $$,
     );
 
+=head2 C<page_size>
+
+The page size.
+
+=cut
+
+has page_size => (
+    is      => 'lazy',
+    isa     => Int,
+    default => sub {
+        my $psz = `getconf PAGE_SIZE`;
+        chomp($psz);
+        $psz;
+        },
+    init_arg => undef,
+    );
+
 =head2 C<statm>
 
 The raw array reference of values.
@@ -121,6 +138,13 @@ my %stats = (
     lib      => 4,
     data     => 5,
     dt       => 6,
+    vsz      => 0, # alias
+    rss      => 1, # alias
+    );
+
+my %alts = (       # page_size multipliers
+    bytes    => 1,
+    kb       => 1024,
     );
 
 foreach my $attr (keys %stats) {
@@ -130,12 +154,30 @@ foreach my $attr (keys %stats) {
         default  => sub { shift->statm->[$stats{$attr}] },
         init_arg => undef,
         );
+
+    no strict 'refs';
+    *{$attr . '_pages'} = \&{$attr};
+
+    foreach my $alt (keys %alts) {
+        has "${attr}_${alt}" => (
+            is       => 'lazy',
+            isa      => Int,
+            default  => sub { my $self = shift;
+                              $self->statm->[$stats{$attr}] * $self->page_size / $alts{$alt};
+                              },
+            init_arg => undef,
+            );
+        }
+
     }
 
+=head1 ALIASES
 
-*vss = \&size;
-*vsz = \&size;
-*rss = \&resident;
+You can append the "_pages" suffix to attributes to make it explicit
+that the return value is in pages, e.g. C<vsz_pages>.
+
+You can also use the "_bytes" or "_kb" suffixes to get the values in bytes
+or kilobytes, e.g. C<vsz_bytes> and C<vsz_kb>.
 
 =for readme continue
 

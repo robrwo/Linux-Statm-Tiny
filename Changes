@@ -7,9 +7,18 @@ Revision history for {{$dist->name}}
   - Bumped copyright year.
 
   [Enhancements]
-  - Added vsz as alias for size. (vss is actually a typo.)
+  - Added vsz as alias for size.
 
   - Used proper aliases instead of wrapper methods.
+
+  - Added *_pages aliases.
+
+  - Aded page_size attribute.
+
+  - Added *_bytes and *_kb methods.
+
+  [Incompatabile Changes]
+  - Removed vss alias, which is a typo. Use vsz.
 
 0.0201    2015-01-05 18:19:39+00:00 Europe/London
   [Other Changes]
