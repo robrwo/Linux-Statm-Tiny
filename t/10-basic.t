@@ -22,6 +22,7 @@ foreach my $key (keys %stats) {
     }
 
 is $stat->vss, $stat->size, 'vss';
+is $stat->vsz, $stat->size, 'vsz';
 is $stat->rss, $stat->resident, 'rss';
 
 done_testing;

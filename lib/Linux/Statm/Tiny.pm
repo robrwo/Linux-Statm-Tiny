@@ -81,7 +81,7 @@ sub _build_statm {
 
 =head2 C<size>
 
-=head2 c<vss>
+=head2 C<vsz>
 
 Total program size, in pages.
 
@@ -132,13 +132,10 @@ foreach my $attr (keys %stats) {
         );
     }
 
-sub vss {
-    shift->size(@_);
-    }
 
-sub rss {
-    shift->resident(@_);
-    }
+*vss = \&size;
+*vsz = \&size;
+*rss = \&resident;
 
 =for readme continue
 
