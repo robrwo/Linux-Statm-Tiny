@@ -4,6 +4,8 @@ Revision history for {{$dist->name}}
   [Documentation]
   - Fixed typo in POD markup.
 
+  - Bumped copyright year.
+
   [Enhancements]
   - Added vsz as alias for size. (vss is actually a typo.)
 
