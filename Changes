@@ -12,6 +12,10 @@ Revision history for Linux-Statm-Tiny
 
   - Removed use of common::sense in the tests.
 
+  - Added mb aliases, e.g. "size_mb".
+
+  - The kb and mb aliases use the ceil function to round values up.
+
 0.0300    2015-01-12 11:26:08+00:00 Europe/London
   [Documentation]
   - Fixed typo in POD markup.

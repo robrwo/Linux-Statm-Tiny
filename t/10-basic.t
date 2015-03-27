@@ -3,6 +3,8 @@ use warnings;
 
 use Test::More;
 
+use POSIX qw/ ceil /;
+
 use_ok 'Linux::Statm::Tiny';
 
 ok my $stat = Linux::Statm::Tiny->new(), 'new';
@@ -23,6 +25,7 @@ my %mults = (
     pages    => 1,
     bytes    => $stat->page_size,
     kb       => $stat->page_size / 1024,
+    mb       => $stat->page_size / (1024 * 1024),
     );
 
 note( explain $stat->statm );
@@ -35,7 +38,7 @@ foreach my $key (keys %stats) {
     foreach my $type (keys %mults) {
         my $name = "${key}_${type}";
         ok my $method = $stat->can($name), "can ${name}";
-        is $stat->$method, $stat->$key * $mults{$type}, $name;
+        is $stat->$method, ceil($stat->$key * $mults{$type}), $name;
         }
 
     }

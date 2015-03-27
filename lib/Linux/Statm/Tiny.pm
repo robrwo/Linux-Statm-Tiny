@@ -4,6 +4,7 @@ use Moo;
 use MooX::Aliases;
 
 use Fcntl qw/ O_RDONLY /;
+use POSIX qw/ ceil /;
 use Types::Standard qw/ ArrayRef Int /;
 
 {
@@ -153,6 +154,7 @@ my %aliases = (
 my %alts = (       # page_size multipliers
     bytes    => 1,
     kb       => 1024,
+    mb       => 1048576,
     );
 
 foreach my $attr (keys %stats) {
@@ -172,7 +174,7 @@ foreach my $attr (keys %stats) {
             is       => 'lazy',
             isa      => Int,
             default  => sub { my $self = shift;
-                              $self->statm->[$stats{$attr}] * $self->page_size / $alts{$alt};
+                              ceil($self->statm->[$stats{$attr}] * $self->page_size / $alts{$alt});
                               },
             init_arg => undef,
             );
@@ -185,8 +187,12 @@ foreach my $attr (keys %stats) {
 You can append the "_pages" suffix to attributes to make it explicit
 that the return value is in pages, e.g. C<vsz_pages>.
 
-You can also use the "_bytes" or "_kb" suffixes to get the values in bytes
-or kilobytes, e.g. C<vsz_bytes> and C<vsz_kb>.
+You can also use the "_bytes", "_kb" or "_mb" suffixes to get the
+values in bytes, kilobytes or megabytes, e.g. C<size_bytes>, C<size_kb>
+and C<size_mb>.
+
+The fractional kilobyte and megabyte sizes will be rounded up, e.g.
+if the L</size> is 1.04 MB, then C<size_mb> will return "2".
 
 =for readme continue
 
