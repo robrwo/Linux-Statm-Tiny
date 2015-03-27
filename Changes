@@ -1,6 +1,9 @@
 Revision history for Linux-Statm-Tiny
 
 {{$NEXT}}
+  [Documentation]
+  - Improved POD so that it's clear that vsz and rss are aliases.
+
   [Enhancements]
   - vsz and rss and explicitly defined as aliases
 

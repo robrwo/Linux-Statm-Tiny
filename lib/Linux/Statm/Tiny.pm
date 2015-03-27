@@ -99,15 +99,19 @@ sub _build_statm {
 
 =head2 C<size>
 
+Total program size, in pages.
+
 =head2 C<vsz>
 
-Total program size, in pages.
+An alias for L</size>.
 
 =head2 C<resident>
 
+Resident set size (RSS), in pages.
+
 =head2 C<rss>
 
-Resident set size (RSS), in pages.
+An alias for L</resident>.
 
 =head2 C<share>
 
