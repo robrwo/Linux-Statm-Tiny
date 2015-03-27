@@ -1,12 +1,14 @@
 package Linux::Statm::Tiny;
 
 use Moo;
+use MooX::Aliases;
 
 use Fcntl qw/ O_RDONLY /;
+use POSIX qw/ ceil /;
 use Types::Standard qw/ ArrayRef Int /;
 
 {
-    $Linux::Statm::Tiny::VERSION = '0.0300'
+    $Linux::Statm::Tiny::VERSION = '0.0400'
 }
 
 =head1 NAME
@@ -83,6 +85,7 @@ The raw array reference of values.
 has statm => (
     is       => 'lazy',
     isa      => ArrayRef[Int],
+    writer   => 'refresh',
     init_arg => undef,
     );
 
@@ -98,15 +101,19 @@ sub _build_statm {
 
 =head2 C<size>
 
+Total program size, in pages.
+
 =head2 C<vsz>
 
-Total program size, in pages.
+An alias for L</size>.
 
 =head2 C<resident>
 
+Resident set size (RSS), in pages.
+
 =head2 C<rss>
 
-Resident set size (RSS), in pages.
+An alias for L</resident>.
 
 =head2 C<share>
 
@@ -138,14 +145,20 @@ my %stats = (
     lib      => 4,
     data     => 5,
     dt       => 6,
-    vsz      => 0, # alias
-    rss      => 1, # alias
+    );
+
+my %aliases = (
+    size     => 'vsz',
+    resident => 'rss',
     );
 
 my %alts = (       # page_size multipliers
     bytes    => 1,
     kb       => 1024,
+    mb       => 1048576,
     );
+
+my @attrs;
 
 foreach my $attr (keys %stats) {
     has $attr => (
@@ -153,31 +166,59 @@ foreach my $attr (keys %stats) {
         isa      => Int,
         default  => sub { shift->statm->[$stats{$attr}] },
         init_arg => undef,
+        alias    => [ grep { defined $_ } $aliases{$attr}, "${attr}_pages" ],
+        clearer  => "_refresh_${attr}",
         );
 
-    no strict 'refs';
-    *{$attr . '_pages'} = \&{$attr};
+    push @attrs, $attr;
 
     foreach my $alt (keys %alts) {
         has "${attr}_${alt}" => (
             is       => 'lazy',
             isa      => Int,
             default  => sub { my $self = shift;
-                              $self->statm->[$stats{$attr}] * $self->page_size / $alts{$alt};
+                              ceil($self->$attr * $self->page_size / $alts{$alt});
                               },
             init_arg => undef,
+            clearer  => "_refresh_${attr}_${alt}",
             );
+
+        push @attrs, "${attr}_${alt}";
         }
 
     }
+
+around refresh => sub {
+    my ($next, $self) = @_;
+    $self->$next( $self->_build_statm );
+    foreach my $attr (@attrs) {
+        my $meth = "_refresh_${attr}";
+        $self->$meth;
+        }
+    };
+
 
 =head1 ALIASES
 
 You can append the "_pages" suffix to attributes to make it explicit
 that the return value is in pages, e.g. C<vsz_pages>.
 
-You can also use the "_bytes" or "_kb" suffixes to get the values in bytes
-or kilobytes, e.g. C<vsz_bytes> and C<vsz_kb>.
+You can also use the "_bytes", "_kb" or "_mb" suffixes to get the
+values in bytes, kilobytes or megabytes, e.g. C<size_bytes>, C<size_kb>
+and C<size_mb>.
+
+The fractional kilobyte and megabyte sizes will be rounded up, e.g.
+if the L</size> is 1.04 MB, then C<size_mb> will return "2".
+
+=head1 METHODS
+
+head2 C<refresh>
+
+The values do not change dynamically. If you need to refresh the
+values, then you you must either create a new instance of the object,
+or use the C<refresh> method:
+
+  $stats->refresh;
 
 =for readme continue
 

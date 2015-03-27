@@ -1,13 +1,11 @@
+use strict;
+use warnings;
+
 use Test::More;
-use common::sense;
+
+use POSIX qw/ ceil /;
 
 use_ok 'Linux::Statm::Tiny';
-
-ok my $stat = Linux::Statm::Tiny->new(), 'new';
-
-my $psz = `getconf PAGE_SIZE`;
-chomp($psz);
-is $stat->page_size, $psz, 'page_size';
 
 my %stats = (
     size     => 0,
@@ -17,28 +15,50 @@ my %stats = (
     data     => 5,
     );
 
+my $psz = `getconf PAGE_SIZE`;
+chomp($psz);
+
 my %mults = (
     pages    => 1,
-    bytes    => $stat->page_size,
-    kb       => $stat->page_size / 1024,
+    bytes    => $psz,
+    kb       => $psz / 1024,
+    mb       => $psz / (1024 * 1024),
     );
 
-note( explain $stat->statm );
 
-foreach my $key (keys %stats) {
-    can_ok $stat, $key;
-    note "${key} = " . $stat->$key;
-    is $stat->$key, $stat->statm->[$stats{$key}], $key;
+ok my $stat = Linux::Statm::Tiny->new(), 'new';
 
-    foreach my $type (keys %mults) {
-        my $name = "${key}_${type}";
-        ok my $method = $stat->can($name), "can ${name}";
-        is $stat->$method, $stat->$key * $mults{$type}, $name;
+test_stats($stat);
+
+$stat->refresh;
+
+test_stats($stat);
+
+sub test_stats {
+    my ($stat) = @_;
+
+    is $stat->page_size, $psz, 'page_size';
+
+    note( explain $stat->statm );
+
+    foreach my $key (keys %stats) {
+        can_ok $stat, $key;
+        note "${key} = " . $stat->$key;
+        is $stat->$key, $stat->statm->[$stats{$key}], $key;
+
+        my $alt = "${key}_pages";
+        is $stat->$alt, $stat->$key, $alt;
+
+        foreach my $type (keys %mults) {
+            my $name = "${key}_${type}";
+            ok my $method = $stat->can($name), "can ${name}";
+            is $stat->$method, ceil($stat->$key * $mults{$type}), $name;
+            }
+
         }
 
+    is $stat->vsz, $stat->size, 'vsz';
+    is $stat->rss, $stat->resident, 'rss';
     }
-
-is $stat->vsz, $stat->size, 'vsz';
-is $stat->rss, $stat->resident, 'rss';
 
 done_testing;

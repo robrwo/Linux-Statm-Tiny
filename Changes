@@ -1,5 +1,27 @@
 Revision history for Linux-Statm-Tiny
 
+{{$NEXT}}
+  [Documentation]
+  - Improved POD so that it's clear that vsz and rss are aliases.
+
+  [Enhancements]
+  - vsz and rss and *_pages attributes are explicitly defined as
+    aliases.
+
+  - dist.ini modified to use AutoPrereqs and add better
+    metadata to the distribution.
+
+  - Removed use of common::sense in the tests.
+
+  - Added mb aliases, e.g. "size_mb".
+
+  - The kb and mb aliases use the ceil function to round values up.
+
+  - Added refresh method to refresh values.
+
+  [Other Changes]
+  - Added tests for pages alias.
+
 0.0300    2015-01-12 11:26:08+00:00 Europe/London
   [Documentation]
   - Fixed typo in POD markup.
