@@ -4,6 +4,9 @@ Revision history for Linux-Statm-Tiny
   [Enhancements]
   - vsz and rss and explicitly defined as aliases
 
+  - dist.ini modified to use AutoPrereqs and add better
+    metadata to the distribution.
+
 0.0300    2015-01-12 11:26:08+00:00 Europe/London
   [Documentation]
   - Fixed typo in POD markup.
