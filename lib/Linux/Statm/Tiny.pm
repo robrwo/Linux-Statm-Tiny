@@ -174,7 +174,7 @@ foreach my $attr (keys %stats) {
             is       => 'lazy',
             isa      => Int,
             default  => sub { my $self = shift;
-                              ceil($self->statm->[$stats{$attr}] * $self->page_size / $alts{$alt});
+                              ceil($self->$attr * $self->page_size / $alts{$alt});
                               },
             init_arg => undef,
             );
