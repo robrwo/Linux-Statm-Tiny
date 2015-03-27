@@ -1,5 +1,7 @@
+use strict;
+use warnings;
+
 use Test::More;
-use common::sense;
 
 use_ok 'Linux::Statm::Tiny';
 
