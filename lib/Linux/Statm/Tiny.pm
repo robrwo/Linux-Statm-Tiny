@@ -85,6 +85,7 @@ The raw array reference of values.
 has statm => (
     is       => 'lazy',
     isa      => ArrayRef[Int],
+    writer   => 'refresh',
     init_arg => undef,
     );
 
@@ -157,6 +158,8 @@ my %alts = (       # page_size multipliers
     mb       => 1048576,
     );
 
+my @attrs;
+
 foreach my $attr (keys %stats) {
     has $attr => (
         is       => 'lazy',
@@ -164,7 +167,10 @@ foreach my $attr (keys %stats) {
         default  => sub { shift->statm->[$stats{$attr}] },
         init_arg => undef,
         alias    => $aliases{$attr},
+        clearer  => "_refresh_${attr}",
         );
+
+    push @attrs, $attr;
 
     no strict 'refs';
     *{$attr . '_pages'} = \&{$attr};
@@ -177,10 +183,23 @@ foreach my $attr (keys %stats) {
                               ceil($self->$attr * $self->page_size / $alts{$alt});
                               },
             init_arg => undef,
+            clearer  => "_refresh_${attr}_${alt}",
             );
+
+        push @attrs, "${attr}_${alt}";
         }
 
     }
+
+around refresh => sub {
+    my ($next, $self) = @_;
+    $self->$next( $self->_build_statm );
+    foreach my $attr (@attrs) {
+        my $meth = "_refresh_${attr}";
+        $self->$meth;
+        }
+    };
+
 
 =head1 ALIASES
 
@@ -193,6 +212,16 @@ and C<size_mb>.
 
 The fractional kilobyte and megabyte sizes will be rounded up, e.g.
 if the L</size> is 1.04 MB, then C<size_mb> will return "2".
+
+=head1 METHODS
+
+head2 C<refresh>
+
+The values do not change dynamically. If you need to refresh the
+values, then you you must either create a new instance of the object,
+or use the C<refresh> method:
+
+  $stats->refresh;
 
 =for readme continue
 

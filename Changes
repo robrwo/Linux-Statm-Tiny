@@ -16,6 +16,8 @@ Revision history for Linux-Statm-Tiny
 
   - The kb and mb aliases use the ceil function to round values up.
 
+  - Added refresh method to refresh values.
+
 0.0300    2015-01-12 11:26:08+00:00 Europe/London
   [Documentation]
   - Fixed typo in POD markup.
