@@ -46,6 +46,9 @@ sub test_stats {
         note "${key} = " . $stat->$key;
         is $stat->$key, $stat->statm->[$stats{$key}], $key;
 
+        my $alt = "${key}_pages";
+        is $stat->$alt, $stat->$key, $alt;
+
         foreach my $type (keys %mults) {
             my $name = "${key}_${type}";
             ok my $method = $stat->can($name), "can ${name}";

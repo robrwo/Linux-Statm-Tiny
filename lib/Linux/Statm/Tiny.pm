@@ -166,14 +166,11 @@ foreach my $attr (keys %stats) {
         isa      => Int,
         default  => sub { shift->statm->[$stats{$attr}] },
         init_arg => undef,
-        alias    => $aliases{$attr},
+        alias    => [ grep { defined $_ } $aliases{$attr}, "${attr}_pages" ],
         clearer  => "_refresh_${attr}",
         );
 
     push @attrs, $attr;
-
-    no strict 'refs';
-    *{$attr . '_pages'} = \&{$attr};
 
     foreach my $alt (keys %alts) {
         has "${attr}_${alt}" => (
