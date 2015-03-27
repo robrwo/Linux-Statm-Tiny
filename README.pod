@@ -55,7 +55,7 @@ Improved POD so that it's clear that vsz and rss are aliases.
 
 =item * 
 
-vsz and rss and *_pages attributes are explicitly defined as alias.
+vsz and rss and *_pages attributes are explicitly defined as aliases.
 
 =item * 
 
