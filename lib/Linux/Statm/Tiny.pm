@@ -1,6 +1,7 @@
 package Linux::Statm::Tiny;
 
 use Moo;
+use MooX::Aliases;
 
 use Fcntl qw/ O_RDONLY /;
 use Types::Standard qw/ ArrayRef Int /;
@@ -138,8 +139,11 @@ my %stats = (
     lib      => 4,
     data     => 5,
     dt       => 6,
-    vsz      => 0, # alias
-    rss      => 1, # alias
+    );
+
+my %aliases = (
+    size     => 'vsz',
+    resident => 'rss',
     );
 
 my %alts = (       # page_size multipliers
@@ -153,6 +157,7 @@ foreach my $attr (keys %stats) {
         isa      => Int,
         default  => sub { shift->statm->[$stats{$attr}] },
         init_arg => undef,
+        alias    => $aliases{$attr},
         );
 
     no strict 'refs';
