@@ -4,7 +4,7 @@ Linux::Statm::Tiny - simple access to Linux /proc/../statm
 
 =head1 VERSION
 
-0.0300
+0.0400
 
 =head1 SYNOPSIS
 
@@ -21,13 +21,17 @@ L<How to install CPAN modules|http://www.cpan.org/modules/INSTALL.html>.
 
 =head2 Required Modules
 
-This distribution requires Perl v5.8.0.
+This distribution requires Perl v5.8.8.
 
 This distribution requires the following modules:
 
 =over 4
 
 =item * L<Moo>
+
+=item * L<MooX::Aliases>
+
+=item * L<namespace::sweep>
 
 =item * L<Types::Standard>
 
@@ -41,11 +45,7 @@ This distribution requires the following modules:
 
 =item * 
 
-Fixed typo in POD markup.
-
-=item * 
-
-Bumped copyright year.
+Improved POD so that it's clear that vsz and rss are aliases.
 
 =back
 
@@ -55,33 +55,37 @@ Bumped copyright year.
 
 =item * 
 
-Added vsz as alias for size.
+vsz and rss and *_pages attributes are explicitly defined as alias.
 
 =item * 
 
-Used proper aliases instead of wrapper methods.
+dist.ini modified to use AutoPrereqs and add better metadata to the distribution.
 
 =item * 
 
-Added *_pages aliases.
+Removed use of common::sense in the tests.
 
 =item * 
 
-Aded page_size attribute.
+Added mb aliases, e.g. "size_mb".
 
 =item * 
 
-Added *_bytes and *_kb methods.
+The kb and mb aliases use the ceil function to round values up.
+
+=item * 
+
+Added refresh method to refresh values.
 
 =back
 
-=head2 Incompatabile Changes
+=head2 Other Changes
 
 =over 4
 
 =item * 
 
-Removed vss alias, which is a typo. Use vsz.
+Added tests for pages alias.
 
 =back
 
