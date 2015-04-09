@@ -161,12 +161,17 @@ my %alts = (       # page_size multipliers
 my @attrs;
 
 foreach my $attr (keys %stats) {
+
+    my @aliases = ( "${attr}_pages" );
+    push @aliases, ( $aliases{$attr}, $aliases{$attr} . '_pages' )
+        if $aliases{$attr};
+
     has $attr => (
         is       => 'lazy',
         isa      => Int,
         default  => sub { shift->statm->[$stats{$attr}] },
         init_arg => undef,
-        alias    => [ grep { defined $_ } $aliases{$attr}, "${attr}_pages" ],
+        alias    => \@aliases,
         clearer  => "_refresh_${attr}",
         );
 
@@ -181,6 +186,7 @@ foreach my $attr (keys %stats) {
                               },
             init_arg => undef,
             clearer  => "_refresh_${attr}_${alt}",
+            $aliases{$attr} ? ( alias => $aliases{$attr} . "_${alt}" ) : ( ),
             );
 
         push @attrs, "${attr}_${alt}";

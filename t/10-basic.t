@@ -13,6 +13,8 @@ my %stats = (
     share    => 2,
     text     => 3,
     data     => 5,
+    vsz      => 0,
+    rss      => 1,
     );
 
 my $psz = `getconf PAGE_SIZE`;
