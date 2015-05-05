@@ -1,5 +1,9 @@
 Revision history for Linux-Statm-Tiny
 
+0.0501    2015-05-05 16:58:38+01:00 Europe/London
+  [Bug Fixes]
+  - Die when getting the page size fails.
+
 0.0500    2015-04-09 08:57:25+01:00 Europe/London
   [Enhancements]
   - Added mb/kb/etc aliases to vsz and rss methods.
