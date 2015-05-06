@@ -4,7 +4,7 @@ Linux::Statm::Tiny - simple access to Linux /proc/../statm
 
 =head1 VERSION
 
-0.0502
+0.0503
 
 =head1 SYNOPSIS
 
@@ -45,7 +45,7 @@ This distribution requires the following modules:
 
 =item * 
 
-Page size is only read once when the class is loaded.
+Added error reason when getconf fails.
 
 =back
 
