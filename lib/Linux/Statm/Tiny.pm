@@ -8,7 +8,7 @@ use POSIX qw/ ceil /;
 use Types::Standard qw/ ArrayRef Int /;
 
 {
-    $Linux::Statm::Tiny::VERSION = '0.0502'
+    $Linux::Statm::Tiny::VERSION = '0.0503'
 }
 
 =head1 NAME
@@ -72,7 +72,7 @@ has page_size => (
     isa     => Int,
     default => sub {
         $PageSize //= `getconf PAGE_SIZE`
-            or die "Unable to run getconf PAGE_SIZE";
+            or die "Unable to run getconf PAGE_SIZE: $!";
         $PageSize += 0;
         },
     init_arg => undef,
