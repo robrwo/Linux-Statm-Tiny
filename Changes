@@ -1,5 +1,9 @@
 Revision history for Linux-Statm-Tiny
 
+{{$NEXT}}
+  [Enhancements]
+  - Added error reason when getconf fails.
+
 0.0502    2015-05-05 17:20:25+01:00 Europe/London
   [Enhancements]
   - Page size is only read once when the class is loaded.
