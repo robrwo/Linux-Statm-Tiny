@@ -1,6 +1,10 @@
 Revision history for Linux-Statm-Tiny
 
 {{$NEXT}}
+  [Other Changes]
+  - Use namespace::autoclean, as namespace::sweep is deprecated (GitHub #8).
+
+  - Added namespace tests.
 
 0.0503    2015-05-06 14:18:35+01:00 Europe/London
   [Enhancements]

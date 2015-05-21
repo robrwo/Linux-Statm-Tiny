@@ -251,6 +251,6 @@ merchantability or fitness for a particular purpose.
 
 =cut
 
-use namespace::sweep;
+use namespace::autoclean 0.24;
 
 1;
