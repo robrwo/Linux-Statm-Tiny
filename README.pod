@@ -4,7 +4,7 @@ Linux::Statm::Tiny - simple access to Linux /proc/../statm
 
 =head1 VERSION
 
-0.0503
+0.0504
 
 =head1 SYNOPSIS
 
@@ -31,7 +31,7 @@ This distribution requires the following modules:
 
 =item * L<MooX::Aliases>
 
-=item * L<namespace::sweep>
+=item * L<namespace::autoclean> (version 0.16)
 
 =item * L<Types::Standard>
 
@@ -39,13 +39,21 @@ This distribution requires the following modules:
 
 =head1 RECENT CHANGES
 
-=head2 Enhancements
+=head2 Other Changes
 
 =over 4
 
 =item * 
 
-Added error reason when getconf fails.
+Use namespace::autoclean, as namespace::sweep is deprecated (GitHub #8).
+
+=item * 
+
+Added namespace tests.
+
+=item * 
+
+Added POD tests.
 
 =back
 
