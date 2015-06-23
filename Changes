@@ -4,6 +4,8 @@ Revision history for Linux-Statm-Tiny
   [Other Changes]
   - Only run tests on Linux machines
 
+  - Added Travis-CI configuration to repo
+
 0.0504    2015-05-25 14:35:16+01:00 Europe/London
   [Other Changes]
   - Use namespace::autoclean, as namespace::sweep is deprecated (GitHub #8).
