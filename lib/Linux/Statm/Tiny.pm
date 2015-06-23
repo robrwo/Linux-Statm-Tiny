@@ -8,7 +8,7 @@ use POSIX qw/ ceil /;
 use Types::Standard qw/ ArrayRef Int /;
 
 {
-    $Linux::Statm::Tiny::VERSION = '0.0504'
+    $Linux::Statm::Tiny::VERSION = '0.0505'
 }
 
 =head1 NAME
