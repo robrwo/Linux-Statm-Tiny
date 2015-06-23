@@ -1,6 +1,6 @@
 Revision history for Linux-Statm-Tiny
 
-{{$NEXT}}
+0.0505    2015-06-23 18:05:22+01:00 Europe/London
   [Other Changes]
   - Only run tests on Linux machines
 

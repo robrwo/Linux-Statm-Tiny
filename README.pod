@@ -4,7 +4,7 @@ Linux::Statm::Tiny - simple access to Linux /proc/../statm
 
 =head1 VERSION
 
-0.0504
+0.0505
 
 =head1 SYNOPSIS
 
@@ -45,15 +45,11 @@ This distribution requires the following modules:
 
 =item * 
 
-Use namespace::autoclean, as namespace::sweep is deprecated (GitHub #8).
+Only run tests on Linux machines
 
 =item * 
 
-Added namespace tests.
-
-=item * 
-
-Added POD tests.
+Added Travis-CI configuration to repo
 
 =back
 
