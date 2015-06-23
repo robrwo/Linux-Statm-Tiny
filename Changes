@@ -1,5 +1,9 @@
 Revision history for Linux-Statm-Tiny
 
+{{$NEXT}}
+  [Other Changes]
+  - Only run tests on Linux machines
+
 0.0504    2015-05-25 14:35:16+01:00 Europe/London
   [Other Changes]
   - Use namespace::autoclean, as namespace::sweep is deprecated (GitHub #8).

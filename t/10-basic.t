@@ -3,6 +3,8 @@ use warnings;
 
 use Test::More;
 
+plan skip_all => "Not a Linux machine" if $^O ne 'linux';
+
 use POSIX qw/ ceil /;
 
 use_ok 'Linux::Statm::Tiny';
