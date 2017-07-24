@@ -56,7 +56,7 @@ C<$$>.
 has pid => (
     is      => 'lazy',
     isa     => Int,
-    default => $$,
+    default => sub { $$ },
     );
 
 =head2 C<page_size>
