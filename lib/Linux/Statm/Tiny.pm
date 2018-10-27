@@ -7,9 +7,7 @@ use Fcntl qw/ O_RDONLY /;
 use POSIX qw/ ceil /;
 use Types::Standard qw/ ArrayRef Int /;
 
-{
-    $Linux::Statm::Tiny::VERSION = '0.0505'
-}
+our $VERSION = '0.0506'
 
 =head1 NAME
 

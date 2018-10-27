@@ -10,6 +10,8 @@ Revision history for Linux-Statm-Tiny
   [Other Changes]
   - Fixed Travis-CI configuration in dist.ini
 
+  - Define the module version normally, which works better with buildtools.
+
 0.0505    2015-06-23 18:05:22+01:00 Europe/London
   [Other Changes]
   - Only run tests on Linux machines
