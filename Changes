@@ -1,6 +1,12 @@
 Revision history for Linux-Statm-Tiny
 
 {{$NEXT}}
+  [Bug Fixes]
+  - Fix pid detection in forks (aidy)
+
+  [Tests]
+  - Updated namespace tests and added other POD tests (ether)
+
   [Other Changes]
   - Fixed Travis-CI configuration in dist.ini
 
