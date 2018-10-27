@@ -9,11 +9,7 @@ use Types::Standard qw/ ArrayRef Int /;
 
 our $VERSION = '0.0506'
 
-=head1 NAME
-
-Linux::Statm::Tiny - simple access to Linux /proc/../statm
-
-=for readme plugin version
+# ABSTRACT: simple access to Linux /proc/../statm
 
 =head1 SYNOPSIS
 
@@ -22,19 +18,6 @@ Linux::Statm::Tiny - simple access to Linux /proc/../statm
   my $stats = Linux::Statm::Tiny->new( pid => $$ );
 
   my $size = $stats->size;
-
-=begin :readme
-
-=head1 INSTALLATION
-
-See
-L<How to install CPAN modules|http://www.cpan.org/modules/INSTALL.html>.
-
-=for readme plugin requires heading-level=2 title="Required Modules"
-
-=for readme plugin changes
-
-=end :readme
 
 =head1 DESCRIPTION
 
@@ -226,26 +209,9 @@ or use the C<refresh> method:
 
   $stats->refresh;
 
-=for readme continue
-
 =head1 SEE ALSO
 
 L<proc(5)>.
-
-=head1 AUTHOR
-
-Robert Rothenberg C<< rrwo@thermeon.com >>
-
-=head1 COPYRIGHT
-
-Copyright 2014-2015, Thermeon Worldwide, PLC.
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
-
-This program is distributed in the hope that it will be useful, but
-without any warranty; without even the implied warranty of
-merchantability or fitness for a particular purpose.
 
 =cut
 

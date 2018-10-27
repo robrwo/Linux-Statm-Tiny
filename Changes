@@ -10,6 +10,10 @@ Revision history for Linux-Statm-Tiny
   [Documentation]
   - Change README to markdown format.
 
+  - Stop using Pod::Readme to create README.
+
+  - Use Pod::Weaver to build documentation.
+
   [Other Changes]
   - Remove .travis.yml from git repo.
 

@@ -2,6 +2,10 @@
 
 Linux::Statm::Tiny - simple access to Linux /proc/../statm
 
+# VERSION
+
+version 0.0506
+
 # SYNOPSIS
 
 ```perl
@@ -95,17 +99,32 @@ $stats->refresh;
 
 [proc(5)](http://man.he.net/man5/proc).
 
+# SOURCE
+
+The development version is on github at [https://github.com/robrwo/Linux-Statm-Tiny](https://github.com/robrwo/Linux-Statm-Tiny)
+and may be cloned from [git://github.com/robrwo/Linux-Statm-Tiny.git](git://github.com/robrwo/Linux-Statm-Tiny.git)
+
+# BUGS
+
+Please report any bugs or feature requests on the bugtracker website
+[https://github.com/robrwo/Linux-Statm-Tiny/issues](https://github.com/robrwo/Linux-Statm-Tiny/issues)
+
+When submitting a bug or request, please include a test-file or a
+patch to an existing test-file that illustrates the bug or desired
+feature.
+
 # AUTHOR
 
-Robert Rothenberg `rrwo@thermeon.com`
+Robert Rothenberg <rrwo@cpan.org>
 
-# COPYRIGHT
+# CONTRIBUTORS
 
-Copyright 2014-2015, Thermeon Worldwide, PLC.
+- Adrian Lai <aidy@cpan.org>
+- Karen Etheridge <ether@cpan.org>
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+# COPYRIGHT AND LICENSE
 
-This program is distributed in the hope that it will be useful, but
-without any warranty; without even the implied warranty of
-merchantability or fitness for a particular purpose.
+This software is copyright (c) 2015-2018 by Thermeon Worldwide, PLC.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
