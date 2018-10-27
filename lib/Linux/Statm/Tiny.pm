@@ -9,7 +9,7 @@ use Fcntl qw/ O_RDONLY /;
 use POSIX qw/ ceil /;
 use Types::Standard qw/ ArrayRef Int /;
 
-our $VERSION = '0.0600';
+our $VERSION = '0.0601';
 
 # ABSTRACT: simple access to Linux /proc/../statm
 
