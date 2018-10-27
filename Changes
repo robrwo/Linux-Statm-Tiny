@@ -11,7 +11,7 @@ Revision history for Linux-Statm-Tiny
   - Change README to markdown format.
 
   [Other Changes]
-  - Fixed Travis-CI configuration in dist.ini
+  - Remove .travis.yml from git repo.
 
   - Define the module version normally, which works better with buildtools.
 
