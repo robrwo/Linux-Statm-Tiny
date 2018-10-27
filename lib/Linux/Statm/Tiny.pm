@@ -1,5 +1,7 @@
 package Linux::Statm::Tiny;
 
+use v5.10.1;
+
 use Moo;
 use MooX::Aliases;
 

@@ -4,8 +4,12 @@ Revision history for Linux-Statm-Tiny
   [Bug Fixes]
   - Fix pid detection in forks (aidy)
 
+  - Explicitly set minimum version to v5.10.1.
+
   [Tests]
   - Updated namespace tests and added other POD tests (ether)
+
+  - Added more tests.
 
   [Documentation]
   - Change README to markdown format.
