@@ -7,6 +7,9 @@ Revision history for Linux-Statm-Tiny
   [Tests]
   - Updated namespace tests and added other POD tests (ether)
 
+  [Documentation]
+  - Change README to markdown format.
+
   [Other Changes]
   - Fixed Travis-CI configuration in dist.ini
 
