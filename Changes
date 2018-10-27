@@ -21,6 +21,8 @@ Revision history for Linux-Statm-Tiny
   [Other Changes]
   - Remove .travis.yml from git repo.
 
+  - Updated dist.ini to make releases easier.
+
   - Define the module version normally, which works better with buildtools.
 
 0.0505    2015-06-23 18:05:22+01:00 Europe/London
