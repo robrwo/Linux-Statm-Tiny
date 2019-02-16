@@ -203,7 +203,7 @@ if the L</size> is 1.04 MB, then C<size_mb> will return "2".
 
 =head1 METHODS
 
-head2 C<refresh>
+=head2 C<refresh>
 
 The values do not change dynamically. If you need to refresh the
 values, then you you must either create a new instance of the object,
