@@ -6,6 +6,9 @@ Revision history for Linux-Statm-Tiny
 
   - Bumped copyright year.
 
+  [Toolchain]
+  - Updated MANIFEST.SKIP.
+
 0.0600    2018-10-27 23:37:11+01:00 Europe/London
   [Bug Fixes]
   - Fix pid detection in forks (aidy)
