@@ -9,6 +9,8 @@ use Fcntl qw/ O_RDONLY /;
 use POSIX qw/ ceil /;
 use Types::Standard qw/ ArrayRef Int /;
 
+use constant page_size => POSIX::sysconf POSIX::_SC_PAGESIZE;
+
 our $VERSION = '0.0602';
 
 # ABSTRACT: simple access to Linux /proc/../statm
@@ -45,21 +47,6 @@ has pid => (
 =head2 C<page_size>
 
 The page size.
-
-=cut
-
-my $PageSize;
-
-has page_size => (
-    is      => 'lazy',
-    isa     => Int,
-    default => sub {
-        $PageSize //= `getconf PAGE_SIZE`
-            or die "Unable to run getconf PAGE_SIZE: $!";
-        $PageSize += 0;
-        },
-    init_arg => undef,
-    );
 
 =head2 C<statm>
 
@@ -167,7 +154,7 @@ foreach my $attr (keys %stats) {
             is       => 'lazy',
             isa      => Int,
             default  => sub { my $self = shift;
-                              ceil($self->$attr * $self->page_size / $alts{$alt});
+                              ceil($self->$attr * page_size / $alts{$alt});
                               },
             init_arg => undef,
             clearer  => "_refresh_${attr}_${alt}",
