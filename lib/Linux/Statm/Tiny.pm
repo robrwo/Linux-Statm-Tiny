@@ -11,7 +11,7 @@ use Types::Standard qw/ ArrayRef Int /;
 
 use constant page_size => POSIX::sysconf POSIX::_SC_PAGESIZE;
 
-our $VERSION = '0.0602';
+our $VERSION = '0.0603';
 
 # ABSTRACT: simple access to Linux /proc/../statm
 
