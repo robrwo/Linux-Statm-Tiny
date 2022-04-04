@@ -1,6 +1,8 @@
 Revision history for Linux-Statm-Tiny
 
 {{$NEXT}}
+  [Documentation]
+  - Bumped copyright year.
 
 0.0602    2022-04-04 16:33:52+01:00 Europe/London
   [Bug Fixes]

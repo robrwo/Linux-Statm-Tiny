@@ -126,7 +126,7 @@ Robert Rothenberg <rrwo@cpan.org>
 
 # COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2015-2019 by Thermeon Worldwide, PLC.
+This software is copyright (c) 2015-2022 by Thermeon Worldwide, PLC.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
