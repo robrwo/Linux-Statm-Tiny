@@ -17,7 +17,7 @@ on 'test' => sub {
 };
 
 on 'develop' => sub {
-  requires "Mite" => "0.001006";
+  requires "Mite" => "0.001007";
   requires "Test::CleanNamespaces" => "0.15";
   requires "Test::EOF" => "0";
   requires "Test::EOL" => "0";

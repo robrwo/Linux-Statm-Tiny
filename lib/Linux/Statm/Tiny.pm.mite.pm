@@ -12,39 +12,10 @@ sub new {
     my $no_build = delete $args->{__no_BUILD__};
 
     # Initialize attributes
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     if ( exists($args->{q[pid]}) ) { (do { my $tmp = $args->{q[pid]}; defined($tmp) and !ref($tmp) and $tmp =~ /\A-?[0-9]+\z/ }) or require Carp && Carp::croak(q[Type check failed in constructor: pid should be Int]); $self->{q[pid]} = $args->{q[pid]};  }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     # Enforce strict constructor
-    my @unknown = grep not( do { package Linux::Statm::Tiny::Mite; (defined and !ref and m{\A(?:pid)\z}) } ), keys %{$args}; @unknown and require Carp and Carp::croak("Unexpected keys in constructor: " . join(q[, ], sort @unknown));
+    my @unknown = grep not( do { package Linux::Statm::Tiny::Mite; (defined and !ref and m{\A(?:(?:d(?:ata_pages|t_pages)|lib_pages|pid|r(?:esident_pages|ss(?:_(?:bytes|kb|mb|pages))?)|s(?:hare_pages|ize_pages)|text_pages|vsz(?:_(?:bytes|kb|mb|pages))?))\z}) } ), keys %{$args}; @unknown and require Carp and Carp::croak("Unexpected keys in constructor: " . join(q[, ], sort @unknown));
 
     # Call BUILD methods
     unless ( $no_build ) { $_->($self, $args) for @{ $meta->{BUILD} || [] } };
@@ -99,6 +70,9 @@ my $__XS = !$ENV{MITE_PURE_PERL} && eval { require Class::XSAccessor; Class::XSA
 *_refresh_data = sub { delete $_[0]->{q[data]}; $_[0]; };
 *data = sub { @_ > 1 ? require Carp && Carp::croak("data is a read-only attribute of @{[ref $_[0]]}") : ( exists($_[0]{q[data]}) ? $_[0]{q[data]} : ( $_[0]{q[data]} = do { my $default_value = do { our $__data_DEFAULT__; $__data_DEFAULT__->($_[0]) }; (do { my $tmp = $default_value; defined($tmp) and !ref($tmp) and $tmp =~ /\A-?[0-9]+\z/ }) or do { require Carp; Carp::croak(q[Type check failed in default: data should be Int]) }; $default_value } ) ) };
 
+# Aliases for for data
+sub data_pages { shift->data( @_ ) }
+
 # Accessors for data_bytes
 *_refresh_data_bytes = sub { delete $_[0]->{q[data_bytes]}; $_[0]; };
 *data_bytes = sub { @_ > 1 ? require Carp && Carp::croak("data_bytes is a read-only attribute of @{[ref $_[0]]}") : ( exists($_[0]{q[data_bytes]}) ? $_[0]{q[data_bytes]} : ( $_[0]{q[data_bytes]} = do { my $default_value = do { our $__data_bytes_DEFAULT__; $__data_bytes_DEFAULT__->($_[0]) }; (do { my $tmp = $default_value; defined($tmp) and !ref($tmp) and $tmp =~ /\A-?[0-9]+\z/ }) or do { require Carp; Carp::croak(q[Type check failed in default: data_bytes should be Int]) }; $default_value } ) ) };
@@ -115,6 +89,9 @@ my $__XS = !$ENV{MITE_PURE_PERL} && eval { require Class::XSAccessor; Class::XSA
 *_refresh_dt = sub { delete $_[0]->{q[dt]}; $_[0]; };
 *dt = sub { @_ > 1 ? require Carp && Carp::croak("dt is a read-only attribute of @{[ref $_[0]]}") : ( exists($_[0]{q[dt]}) ? $_[0]{q[dt]} : ( $_[0]{q[dt]} = do { my $default_value = do { our $__dt_DEFAULT__; $__dt_DEFAULT__->($_[0]) }; (do { my $tmp = $default_value; defined($tmp) and !ref($tmp) and $tmp =~ /\A-?[0-9]+\z/ }) or do { require Carp; Carp::croak(q[Type check failed in default: dt should be Int]) }; $default_value } ) ) };
 
+# Aliases for for dt
+sub dt_pages { shift->dt( @_ ) }
+
 # Accessors for dt_bytes
 *_refresh_dt_bytes = sub { delete $_[0]->{q[dt_bytes]}; $_[0]; };
 *dt_bytes = sub { @_ > 1 ? require Carp && Carp::croak("dt_bytes is a read-only attribute of @{[ref $_[0]]}") : ( exists($_[0]{q[dt_bytes]}) ? $_[0]{q[dt_bytes]} : ( $_[0]{q[dt_bytes]} = do { my $default_value = do { our $__dt_bytes_DEFAULT__; $__dt_bytes_DEFAULT__->($_[0]) }; (do { my $tmp = $default_value; defined($tmp) and !ref($tmp) and $tmp =~ /\A-?[0-9]+\z/ }) or do { require Carp; Carp::croak(q[Type check failed in default: dt_bytes should be Int]) }; $default_value } ) ) };
@@ -130,6 +107,9 @@ my $__XS = !$ENV{MITE_PURE_PERL} && eval { require Class::XSAccessor; Class::XSA
 # Accessors for lib
 *_refresh_lib = sub { delete $_[0]->{q[lib]}; $_[0]; };
 *lib = sub { @_ > 1 ? require Carp && Carp::croak("lib is a read-only attribute of @{[ref $_[0]]}") : ( exists($_[0]{q[lib]}) ? $_[0]{q[lib]} : ( $_[0]{q[lib]} = do { my $default_value = do { our $__lib_DEFAULT__; $__lib_DEFAULT__->($_[0]) }; (do { my $tmp = $default_value; defined($tmp) and !ref($tmp) and $tmp =~ /\A-?[0-9]+\z/ }) or do { require Carp; Carp::croak(q[Type check failed in default: lib should be Int]) }; $default_value } ) ) };
+
+# Aliases for for lib
+sub lib_pages { shift->lib( @_ ) }
 
 # Accessors for lib_bytes
 *_refresh_lib_bytes = sub { delete $_[0]->{q[lib_bytes]}; $_[0]; };
@@ -150,21 +130,38 @@ my $__XS = !$ENV{MITE_PURE_PERL} && eval { require Class::XSAccessor; Class::XSA
 *_refresh_resident = sub { delete $_[0]->{q[resident]}; $_[0]; };
 *resident = sub { @_ > 1 ? require Carp && Carp::croak("resident is a read-only attribute of @{[ref $_[0]]}") : ( exists($_[0]{q[resident]}) ? $_[0]{q[resident]} : ( $_[0]{q[resident]} = do { my $default_value = do { our $__resident_DEFAULT__; $__resident_DEFAULT__->($_[0]) }; (do { my $tmp = $default_value; defined($tmp) and !ref($tmp) and $tmp =~ /\A-?[0-9]+\z/ }) or do { require Carp; Carp::croak(q[Type check failed in default: resident should be Int]) }; $default_value } ) ) };
 
+# Aliases for for resident
+sub resident_pages { shift->resident( @_ ) }
+sub rss { shift->resident( @_ ) }
+sub rss_pages { shift->resident( @_ ) }
+
 # Accessors for resident_bytes
 *_refresh_resident_bytes = sub { delete $_[0]->{q[resident_bytes]}; $_[0]; };
 *resident_bytes = sub { @_ > 1 ? require Carp && Carp::croak("resident_bytes is a read-only attribute of @{[ref $_[0]]}") : ( exists($_[0]{q[resident_bytes]}) ? $_[0]{q[resident_bytes]} : ( $_[0]{q[resident_bytes]} = do { my $default_value = do { our $__resident_bytes_DEFAULT__; $__resident_bytes_DEFAULT__->($_[0]) }; (do { my $tmp = $default_value; defined($tmp) and !ref($tmp) and $tmp =~ /\A-?[0-9]+\z/ }) or do { require Carp; Carp::croak(q[Type check failed in default: resident_bytes should be Int]) }; $default_value } ) ) };
+
+# Aliases for for resident_bytes
+sub rss_bytes { shift->resident_bytes( @_ ) }
 
 # Accessors for resident_kb
 *_refresh_resident_kb = sub { delete $_[0]->{q[resident_kb]}; $_[0]; };
 *resident_kb = sub { @_ > 1 ? require Carp && Carp::croak("resident_kb is a read-only attribute of @{[ref $_[0]]}") : ( exists($_[0]{q[resident_kb]}) ? $_[0]{q[resident_kb]} : ( $_[0]{q[resident_kb]} = do { my $default_value = do { our $__resident_kb_DEFAULT__; $__resident_kb_DEFAULT__->($_[0]) }; (do { my $tmp = $default_value; defined($tmp) and !ref($tmp) and $tmp =~ /\A-?[0-9]+\z/ }) or do { require Carp; Carp::croak(q[Type check failed in default: resident_kb should be Int]) }; $default_value } ) ) };
 
+# Aliases for for resident_kb
+sub rss_kb { shift->resident_kb( @_ ) }
+
 # Accessors for resident_mb
 *_refresh_resident_mb = sub { delete $_[0]->{q[resident_mb]}; $_[0]; };
 *resident_mb = sub { @_ > 1 ? require Carp && Carp::croak("resident_mb is a read-only attribute of @{[ref $_[0]]}") : ( exists($_[0]{q[resident_mb]}) ? $_[0]{q[resident_mb]} : ( $_[0]{q[resident_mb]} = do { my $default_value = do { our $__resident_mb_DEFAULT__; $__resident_mb_DEFAULT__->($_[0]) }; (do { my $tmp = $default_value; defined($tmp) and !ref($tmp) and $tmp =~ /\A-?[0-9]+\z/ }) or do { require Carp; Carp::croak(q[Type check failed in default: resident_mb should be Int]) }; $default_value } ) ) };
 
+# Aliases for for resident_mb
+sub rss_mb { shift->resident_mb( @_ ) }
+
 # Accessors for share
 *_refresh_share = sub { delete $_[0]->{q[share]}; $_[0]; };
 *share = sub { @_ > 1 ? require Carp && Carp::croak("share is a read-only attribute of @{[ref $_[0]]}") : ( exists($_[0]{q[share]}) ? $_[0]{q[share]} : ( $_[0]{q[share]} = do { my $default_value = do { our $__share_DEFAULT__; $__share_DEFAULT__->($_[0]) }; (do { my $tmp = $default_value; defined($tmp) and !ref($tmp) and $tmp =~ /\A-?[0-9]+\z/ }) or do { require Carp; Carp::croak(q[Type check failed in default: share should be Int]) }; $default_value } ) ) };
+
+# Aliases for for share
+sub share_pages { shift->share( @_ ) }
 
 # Accessors for share_bytes
 *_refresh_share_bytes = sub { delete $_[0]->{q[share_bytes]}; $_[0]; };
@@ -182,17 +179,31 @@ my $__XS = !$ENV{MITE_PURE_PERL} && eval { require Class::XSAccessor; Class::XSA
 *_refresh_size = sub { delete $_[0]->{q[size]}; $_[0]; };
 *size = sub { @_ > 1 ? require Carp && Carp::croak("size is a read-only attribute of @{[ref $_[0]]}") : ( exists($_[0]{q[size]}) ? $_[0]{q[size]} : ( $_[0]{q[size]} = do { my $default_value = do { our $__size_DEFAULT__; $__size_DEFAULT__->($_[0]) }; (do { my $tmp = $default_value; defined($tmp) and !ref($tmp) and $tmp =~ /\A-?[0-9]+\z/ }) or do { require Carp; Carp::croak(q[Type check failed in default: size should be Int]) }; $default_value } ) ) };
 
+# Aliases for for size
+sub size_pages { shift->size( @_ ) }
+sub vsz { shift->size( @_ ) }
+sub vsz_pages { shift->size( @_ ) }
+
 # Accessors for size_bytes
 *_refresh_size_bytes = sub { delete $_[0]->{q[size_bytes]}; $_[0]; };
 *size_bytes = sub { @_ > 1 ? require Carp && Carp::croak("size_bytes is a read-only attribute of @{[ref $_[0]]}") : ( exists($_[0]{q[size_bytes]}) ? $_[0]{q[size_bytes]} : ( $_[0]{q[size_bytes]} = do { my $default_value = do { our $__size_bytes_DEFAULT__; $__size_bytes_DEFAULT__->($_[0]) }; (do { my $tmp = $default_value; defined($tmp) and !ref($tmp) and $tmp =~ /\A-?[0-9]+\z/ }) or do { require Carp; Carp::croak(q[Type check failed in default: size_bytes should be Int]) }; $default_value } ) ) };
+
+# Aliases for for size_bytes
+sub vsz_bytes { shift->size_bytes( @_ ) }
 
 # Accessors for size_kb
 *_refresh_size_kb = sub { delete $_[0]->{q[size_kb]}; $_[0]; };
 *size_kb = sub { @_ > 1 ? require Carp && Carp::croak("size_kb is a read-only attribute of @{[ref $_[0]]}") : ( exists($_[0]{q[size_kb]}) ? $_[0]{q[size_kb]} : ( $_[0]{q[size_kb]} = do { my $default_value = do { our $__size_kb_DEFAULT__; $__size_kb_DEFAULT__->($_[0]) }; (do { my $tmp = $default_value; defined($tmp) and !ref($tmp) and $tmp =~ /\A-?[0-9]+\z/ }) or do { require Carp; Carp::croak(q[Type check failed in default: size_kb should be Int]) }; $default_value } ) ) };
 
+# Aliases for for size_kb
+sub vsz_kb { shift->size_kb( @_ ) }
+
 # Accessors for size_mb
 *_refresh_size_mb = sub { delete $_[0]->{q[size_mb]}; $_[0]; };
 *size_mb = sub { @_ > 1 ? require Carp && Carp::croak("size_mb is a read-only attribute of @{[ref $_[0]]}") : ( exists($_[0]{q[size_mb]}) ? $_[0]{q[size_mb]} : ( $_[0]{q[size_mb]} = do { my $default_value = do { our $__size_mb_DEFAULT__; $__size_mb_DEFAULT__->($_[0]) }; (do { my $tmp = $default_value; defined($tmp) and !ref($tmp) and $tmp =~ /\A-?[0-9]+\z/ }) or do { require Carp; Carp::croak(q[Type check failed in default: size_mb should be Int]) }; $default_value } ) ) };
+
+# Aliases for for size_mb
+sub vsz_mb { shift->size_mb( @_ ) }
 
 # Accessors for statm
 *statm = sub { @_ > 1 ? require Carp && Carp::croak("statm is a read-only attribute of @{[ref $_[0]]}") : ( exists($_[0]{q[statm]}) ? $_[0]{q[statm]} : ( $_[0]{q[statm]} = do { my $default_value = $_[0]->_build_statm; do { package Linux::Statm::Tiny::Mite; (ref($default_value) eq 'ARRAY') and do { my $ok = 1; for my $i (@{$default_value}) { ($ok = 0, last) unless (do { my $tmp = $i; defined($tmp) and !ref($tmp) and $tmp =~ /\A-?[0-9]+\z/ }) }; $ok } } or do { require Carp; Carp::croak(q[Type check failed in default: statm should be ArrayRef[Int]]) }; $default_value } ) ) };
@@ -201,6 +212,9 @@ my $__XS = !$ENV{MITE_PURE_PERL} && eval { require Class::XSAccessor; Class::XSA
 # Accessors for text
 *_refresh_text = sub { delete $_[0]->{q[text]}; $_[0]; };
 *text = sub { @_ > 1 ? require Carp && Carp::croak("text is a read-only attribute of @{[ref $_[0]]}") : ( exists($_[0]{q[text]}) ? $_[0]{q[text]} : ( $_[0]{q[text]} = do { my $default_value = do { our $__text_DEFAULT__; $__text_DEFAULT__->($_[0]) }; (do { my $tmp = $default_value; defined($tmp) and !ref($tmp) and $tmp =~ /\A-?[0-9]+\z/ }) or do { require Carp; Carp::croak(q[Type check failed in default: text should be Int]) }; $default_value } ) ) };
+
+# Aliases for for text
+sub text_pages { shift->text( @_ ) }
 
 # Accessors for text_bytes
 *_refresh_text_bytes = sub { delete $_[0]->{q[text_bytes]}; $_[0]; };
