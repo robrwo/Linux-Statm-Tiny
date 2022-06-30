@@ -1,4 +1,5 @@
 package Linux::Statm::Tiny;
+
 use v5.10.1;
 
 use Linux::Statm::Tiny::Mite;
