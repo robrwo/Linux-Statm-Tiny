@@ -139,7 +139,7 @@ foreach my $attr (keys %stats) {
         default  => sub { shift->statm->[$stats{$attr}] },
         init_arg => undef,
         clearer  => "_refresh_${attr}",
-        @aliases ? (alias => \@aliases) : (),
+        alias    => \@aliases,
         );
 
     push @attrs, $attr;
@@ -153,7 +153,7 @@ foreach my $attr (keys %stats) {
                               },
             init_arg => undef,
             clearer  => "_refresh_${attr}_${alt}",
-            $aliases{$attr} ? (alias => $aliases{$attr}."_${alt}") : (),
+            alias    => ( $aliases{$attr} ? $aliases{$attr}."_${alt}" : undef ),
             );
 
         push @attrs, "${attr}_${alt}";
