@@ -2,13 +2,10 @@ package Linux::Statm::Tiny;
 
 use v5.10.1;
 
-use Moo;
-use MooX::Aliases;
+use Linux::Statm::Tiny::Mite;
 
 use Fcntl qw/ O_RDONLY /;
 use POSIX qw/ ceil /;
-use Types::Standard qw/ ArrayRef Int /;
-
 use constant page_size => POSIX::sysconf POSIX::_SC_PAGESIZE;
 
 our $VERSION = '0.0604';
@@ -40,7 +37,7 @@ C<$$>.
 
 has pid => (
     is      => 'lazy',
-    isa     => Int,
+    isa     => 'Int',
     default => sub { $$ },
     );
 
@@ -56,7 +53,7 @@ The raw array reference of values.
 
 has statm => (
     is       => 'lazy',
-    isa      => ArrayRef[Int],
+    isa      => 'ArrayRef[Int]',
     writer   => 'refresh',
     init_arg => undef,
     );
@@ -140,11 +137,11 @@ foreach my $attr (keys %stats) {
 
     has $attr => (
         is       => 'lazy',
-        isa      => Int,
+        isa      => 'Int',
         default  => sub { shift->statm->[$stats{$attr}] },
         init_arg => undef,
-        alias    => \@aliases,
         clearer  => "_refresh_${attr}",
+        alias    => \@aliases,
         );
 
     push @attrs, $attr;
@@ -152,13 +149,13 @@ foreach my $attr (keys %stats) {
     foreach my $alt (keys %alts) {
         has "${attr}_${alt}" => (
             is       => 'lazy',
-            isa      => Int,
+            isa      => 'Int',
             default  => sub { my $self = shift;
                               ceil($self->$attr * page_size / $alts{$alt});
                               },
             init_arg => undef,
             clearer  => "_refresh_${attr}_${alt}",
-            $aliases{$attr} ? ( alias => $aliases{$attr} . "_${alt}" ) : ( ),
+            alias    => ( $aliases{$attr} ? $aliases{$attr}."_${alt}" : undef ),
             );
 
         push @attrs, "${attr}_${alt}";
@@ -203,7 +200,5 @@ or use the C<refresh> method:
 L<proc(5)>.
 
 =cut
-
-use namespace::autoclean 0.16;
 
 1;
