@@ -44,7 +44,6 @@
 # Author Extras
 ^inc/.*\.pod$
 ^pkg/
-^\.mite/
 # ^xt/
 # ^dist.ini$
 
@@ -107,3 +106,4 @@ perltidy\.(LOG|ERR)
 fatlib/
 cpanfile\.snapshot$
 local/
+^\.mite/
