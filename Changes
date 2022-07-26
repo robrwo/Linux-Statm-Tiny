@@ -5,6 +5,9 @@ Revision history for Linux-Statm-Tiny
   - Ported over from Moo to Mite (tobyink), which removes the
     non-core dependencies.
 
+  [Other]
+  - Core prequisites are explicitly listed.
+
 0.0603    2022-04-04 16:41:03+01:00 Europe/London
   [Documentation]
   - Bumped copyright year.
