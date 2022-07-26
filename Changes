@@ -11,6 +11,8 @@ Revision history for Linux-Statm-Tiny
   [Tests]
   - Removed file portability tests. (Unnecessay, since this is for Linux.)
 
+  - Removed clean namespace tests.
+
 0.0603    2022-04-04 16:41:03+01:00 Europe/London
   [Documentation]
   - Bumped copyright year.

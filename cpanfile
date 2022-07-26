@@ -26,7 +26,6 @@ on 'configure' => sub {
 
 on 'develop' => sub {
   requires "Mite" => "0.002001";
-  requires "Test::CleanNamespaces" => "0.15";
   requires "Test::EOF" => "0";
   requires "Test::EOL" => "0";
   requires "Test::MinimumVersion" => "0";
