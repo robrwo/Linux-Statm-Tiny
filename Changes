@@ -8,6 +8,9 @@ Revision history for Linux-Statm-Tiny
   [Other]
   - Core prequisites are explicitly listed.
 
+  [Tests]
+  - Removed file portability tests. (Unnecessay, since this is for Linux.)
+
 0.0603    2022-04-04 16:41:03+01:00 Europe/London
   [Documentation]
   - Bumped copyright year.
