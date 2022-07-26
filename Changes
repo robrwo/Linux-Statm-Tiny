@@ -8,6 +8,8 @@ Revision history for Linux-Statm-Tiny
   [Other]
   - Core prequisites are explicitly listed.
 
+  - Removed import of ceil function into the namespace.
+
   [Tests]
   - Removed file portability tests. (Unnecessay, since this is for Linux.)
 

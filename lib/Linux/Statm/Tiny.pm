@@ -5,7 +5,7 @@ use v5.10.1;
 use Linux::Statm::Tiny::Mite;
 
 use Fcntl qw/ O_RDONLY /;
-use POSIX qw/ ceil /;
+use POSIX ();
 use constant page_size => POSIX::sysconf POSIX::_SC_PAGESIZE;
 
 our $VERSION = '0.0700';
@@ -151,7 +151,7 @@ foreach my $attr (keys %stats) {
             is       => 'lazy',
             isa      => 'Int',
             default  => sub { my $self = shift;
-                              ceil($self->$attr * page_size / $alts{$alt});
+                              POSIX::ceil($self->$attr * page_size / $alts{$alt});
                               },
             init_arg => undef,
             clearer  => "_refresh_${attr}_${alt}",
