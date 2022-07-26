@@ -8,7 +8,7 @@ use Fcntl qw/ O_RDONLY /;
 use POSIX qw/ ceil /;
 use constant page_size => POSIX::sysconf POSIX::_SC_PAGESIZE;
 
-our $VERSION = '0.0604';
+our $VERSION = '0.0700';
 
 # ABSTRACT: simple access to Linux /proc/../statm
 
