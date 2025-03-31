@@ -4,7 +4,7 @@ Linux::Statm::Tiny - simple access to Linux /proc/../statm
 
 # VERSION
 
-version 0.0701
+version 0.0702
 
 # SYNOPSIS
 
