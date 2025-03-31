@@ -1,10 +1,12 @@
 Revision history for Linux-Statm-Tiny
 
 {{$NEXT}}
+  [Documentation]
+  - Updated Changes to reference the CVE for a security issue.
 
 0.0701    2025-03-31 14:51:49+01:00 Europe/London
   [Security]
-  - Rebuilt with Mite 0.013000.
+  - Rebuilt with Mite 0.013000 to fix CVE-2025-3051. (See also CVE-2025-30672.)
 
   [Documentation]
   - Added a security policy.
