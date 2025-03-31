@@ -1,6 +1,8 @@
 Revision history for Linux-Statm-Tiny
 
 {{$NEXT}}
+  [Security]
+  - Rebuilt with Mite 0.013000.
 
 0.0700    2022-07-26 17:27:32+01:00 Europe/London
   [Enhancements]
