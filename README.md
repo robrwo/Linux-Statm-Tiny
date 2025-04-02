@@ -71,7 +71,7 @@ Data + Stack.
 
 Dirty pages (unused in Linux 2.6).
 
-# ALIASES
+## Suffixes
 
 You can append the "\_pages" suffix to attributes to make it explicit
 that the return value is in pages, e.g. `vsz_pages`.
@@ -113,9 +113,16 @@ When submitting a bug or request, please include a test-file or a
 patch to an existing test-file that illustrates the bug or desired
 feature.
 
+## Reporting Security Vulnerabilities
+
+Security issues should not be reported on the bugtracker website. Please see `SECURITY.md` for instructions how to
+report security vulnerabilities
+
 # AUTHOR
 
 Robert Rothenberg <rrwo@cpan.org>
+
+The current maintainer is James Raspass <jraspass@gmail.com>.
 
 # CONTRIBUTORS
 
