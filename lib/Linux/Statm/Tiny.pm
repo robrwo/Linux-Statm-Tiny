@@ -1,14 +1,66 @@
 package Linux::Statm::Tiny;
 
-use v5.10.1;
+use v5.10;
 
-use Linux::Statm::Tiny::Mite;
+use strict;
+use warnings;
 
-use Fcntl qw/ O_RDONLY /;
 use POSIX ();
 use constant page_size => POSIX::sysconf POSIX::_SC_PAGESIZE;
 
 our $VERSION = '0.0702';
+
+sub new {
+    my ( $class, $pid ) = @_;
+
+    return bless { pid => $pid }, $class;
+}
+
+sub pid { shift->{pid} //= $$ }
+
+sub refresh {
+    my $self = shift;
+
+    my $pid = $self->pid;
+    open my $fh, '<', "/proc/$pid/statm"
+        or die "Unable to open /proc/$pid/statm: $!";
+
+    return $self->{statm} = [ split ' ', scalar <$fh> ];
+}
+
+sub statm {
+    my $self = shift;
+
+    return $self->{statm} // $self->refresh;
+}
+
+my @stats    = qw( size resident share text lib data dt );
+my %aliases  = ( resident => 'rss', size => 'vsz' );
+my %suffixes = (
+    ''      => 1,
+    _pages  => 1,
+    _bytes  => page_size,
+    _kb     => page_size / 1024,
+    _mb     => page_size / (1024 * 1024),
+);
+
+for my $i ( 0 ... $#stats ) {
+    my $stat = $stats[$i];
+
+    for my $method ( $stat, $aliases{$stat} // () ) {
+        while ( my ( $suffix, $factor ) = each %suffixes ) {
+            no strict 'refs';
+
+            *{ $method . $suffix } = sub {
+                return POSIX::ceil shift->statm->[$i] * $factor;
+            };
+        }
+    }
+}
+
+1;
+
+__END__
 
 # ABSTRACT: simple access to Linux /proc/../statm
 
@@ -31,14 +83,6 @@ This class returns the Linux memory stats from F</proc/$pid/statm>.
 The PID to obtain stats for. If omitted, it uses the current PID from
 C<$$>.
 
-=cut
-
-has pid => (
-    is      => 'lazy',
-    isa     => 'Int',
-    default => sub { $$ },
-    );
-
 =attr C<page_size>
 
 The page size.
@@ -46,25 +90,6 @@ The page size.
 =attr C<statm>
 
 The raw array reference of values.
-
-=cut
-
-has statm => (
-    is       => 'lazy',
-    isa      => 'ArrayRef[Int]',
-    writer   => 'refresh',
-    init_arg => undef,
-    );
-
-sub _build_statm {
-    my ($self) = @_;
-    my $pid = $self->pid;
-    sysopen( my $fh, "/proc/${pid}/statm", O_RDONLY )
-        or die "Unable to open /proc/${pid}/statm: $!";
-    chomp(my $raw = <$fh>);
-    close $fh;
-    [ split / /, $raw ];
-    }
 
 =attr C<size>
 
@@ -114,65 +139,6 @@ and C<size_mb>.
 The fractional kilobyte and megabyte sizes will be rounded up, e.g.
 if the L</size> is 1.04 MB, then C<size_mb> will return "2".
 
-=cut
-
-my %stats = (
-    size     => 0,
-    resident => 1,
-    share    => 2,
-    text     => 3,
-    lib      => 4,
-    data     => 5,
-    dt       => 6,
-    );
-
-my %aliases = (
-    size     => 'vsz',
-    resident => 'rss',
-    );
-
-my %alts = (       # page_size multipliers
-    bytes    => 1,
-    kb       => 1024,
-    mb       => 1048576,
-    );
-
-my @attrs;
-
-foreach my $attr (keys %stats) {
-
-    my @aliases = ( "${attr}_pages" );
-    push @aliases, ( $aliases{$attr}, $aliases{$attr} . '_pages' )
-        if $aliases{$attr};
-
-    has $attr => (
-        is       => 'lazy',
-        isa      => 'Int',
-        default  => sub { shift->statm->[$stats{$attr}] },
-        init_arg => undef,
-        clearer  => "_refresh_${attr}",
-        alias    => \@aliases,
-        );
-
-    push @attrs, $attr;
-
-    foreach my $alt (keys %alts) {
-        has "${attr}_${alt}" => (
-            is       => 'lazy',
-            isa      => 'Int',
-            default  => sub { my $self = shift;
-                              POSIX::ceil($self->$attr * page_size / $alts{$alt});
-                              },
-            init_arg => undef,
-            clearer  => "_refresh_${attr}_${alt}",
-            alias    => ( $aliases{$attr} ? $aliases{$attr}."_${alt}" : undef ),
-            );
-
-        push @attrs, "${attr}_${alt}";
-        }
-
-    }
-
 =method C<refresh>
 
 The values do not change dynamically. If you need to refresh the
@@ -180,8 +146,6 @@ values, then you you must either create a new instance of the object,
 or use the C<refresh> method:
 
   $stats->refresh;
-
-=cut
 
 around refresh => sub {
     my ($next, $self) = @_;
@@ -206,7 +170,3 @@ The current maintainer is James Raspass <jraspass@gmail.com>.
 
 Security issues should not be reported on the bugtracker website. Please see F<SECURITY.md> for instructions how to
 report security vulnerabilities
-
-=cut
-
-1;
