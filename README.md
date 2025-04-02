@@ -122,6 +122,8 @@ report security vulnerabilities
 
 Robert Rothenberg <rrwo@cpan.org>
 
+The current maintainer is James Raspass <jraspass@gmail.com>.
+
 # CONTRIBUTORS
 
 - Adrian Lai <aidy@cpan.org>

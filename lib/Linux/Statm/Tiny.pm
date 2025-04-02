@@ -196,6 +196,10 @@ around refresh => sub {
 
 L<proc(5)>.
 
+=head1 append:AUTHOR
+
+The current maintainer is James Raspass <jraspass@gmail.com>.
+
 =head1 append:BUGS
 
 =head2 Reporting Security Vulnerabilities
