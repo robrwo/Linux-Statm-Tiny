@@ -8,6 +8,8 @@ Revision history for Linux-Statm-Tiny
 
   - Reorganised POD.
 
+  - Updated POD with a reference to the security policy.
+
 0.0701    2025-03-31 14:51:49+01:00 Europe/London
   [Security]
   - Rebuilt with Mite 0.013000 to fix CVE-2025-3051. (See also CVE-2025-30672.)
