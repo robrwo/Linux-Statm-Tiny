@@ -26,9 +26,7 @@ This class returns the Linux memory stats from F</proc/$pid/statm>.
 
 =for readme stop
 
-=head1 ATTRIBUTES
-
-=head2 C<pid>
+=attr C<pid>
 
 The PID to obtain stats for. If omitted, it uses the current PID from
 C<$$>.
@@ -41,11 +39,11 @@ has pid => (
     default => sub { $$ },
     );
 
-=head2 C<page_size>
+=attr C<page_size>
 
 The page size.
 
-=head2 C<statm>
+=attr C<statm>
 
 The raw array reference of values.
 
@@ -68,41 +66,53 @@ sub _build_statm {
     [ split / /, $raw ];
     }
 
-=head2 C<size>
+=attr C<size>
 
 Total program size, in pages.
 
-=head2 C<vsz>
+=attr C<vsz>
 
 An alias for L</size>.
 
-=head2 C<resident>
+=attr C<resident>
 
 Resident set size (RSS), in pages.
 
-=head2 C<rss>
+=attr C<rss>
 
 An alias for L</resident>.
 
-=head2 C<share>
+=attr C<share>
 
 Shared pages.
 
-=head2 C<text>
+=attr C<text>
 
 Text (code).
 
-=head2 C<lib>
+=attr C<lib>
 
 Library (unused in Linux 2.6).
 
-=head2 C<data>
+=attr C<data>
 
 Data + Stack.
 
-=head2 C<dt>
+=attr C<dt>
 
 Dirty pages (unused in Linux 2.6).
+
+=attr Suffixes
+
+You can append the "_pages" suffix to attributes to make it explicit
+that the return value is in pages, e.g. C<vsz_pages>.
+
+You can also use the "_bytes", "_kb" or "_mb" suffixes to get the
+values in bytes, kilobytes or megabytes, e.g. C<size_bytes>, C<size_kb>
+and C<size_mb>.
+
+The fractional kilobyte and megabyte sizes will be rounded up, e.g.
+if the L</size> is 1.04 MB, then C<size_mb> will return "2".
 
 =cut
 
@@ -163,6 +173,16 @@ foreach my $attr (keys %stats) {
 
     }
 
+=method C<refresh>
+
+The values do not change dynamically. If you need to refresh the
+values, then you you must either create a new instance of the object,
+or use the C<refresh> method:
+
+  $stats->refresh;
+
+=cut
+
 around refresh => sub {
     my ($next, $self) = @_;
     $self->$next( $self->_build_statm );
@@ -171,29 +191,6 @@ around refresh => sub {
         $self->$meth;
         }
     };
-
-
-=head1 ALIASES
-
-You can append the "_pages" suffix to attributes to make it explicit
-that the return value is in pages, e.g. C<vsz_pages>.
-
-You can also use the "_bytes", "_kb" or "_mb" suffixes to get the
-values in bytes, kilobytes or megabytes, e.g. C<size_bytes>, C<size_kb>
-and C<size_mb>.
-
-The fractional kilobyte and megabyte sizes will be rounded up, e.g.
-if the L</size> is 1.04 MB, then C<size_mb> will return "2".
-
-=head1 METHODS
-
-=head2 C<refresh>
-
-The values do not change dynamically. If you need to refresh the
-values, then you you must either create a new instance of the object,
-or use the C<refresh> method:
-
-  $stats->refresh;
 
 =head1 SEE ALSO
 

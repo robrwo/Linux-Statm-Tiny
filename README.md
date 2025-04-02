@@ -71,7 +71,7 @@ Data + Stack.
 
 Dirty pages (unused in Linux 2.6).
 
-# ALIASES
+## Suffixes
 
 You can append the "\_pages" suffix to attributes to make it explicit
 that the return value is in pages, e.g. `vsz_pages`.
