@@ -30,6 +30,7 @@ on 'configure' => sub {
 
 on 'develop' => sub {
   requires "Mite" => "0.013000";
+  requires "Software::Security::Policy::Individual" => "0.10";
   requires "Test::EOF" => "0";
   requires "Test::EOL" => "0";
   requires "Test::MinimumVersion" => "0";
