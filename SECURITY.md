@@ -1,18 +1,22 @@
 # Security Policy for the Linux-Statm-Tiny distribution.
 
-Report issues via the project GitHub repository
+Report security issues via the project
 [Security Advisories](https://github.com/robrwo/Linux-Statm-Tiny/security/advisories).
 
 This is the Security Policy for Linux-Statm-Tiny.
 
+The latest version of the Security Policy can be found in the
+[git repository for Linux-Statm-Tiny](https://github.com/robrwo/Linux-Statm-Tiny).
+
 This text is based on the CPAN Security Group's Guidelines for Adding
-a Security Policy to Perl Distributions (version 1.0.0)
+a Security Policy to Perl Distributions (version 1.3.0)
 https://security.metacpan.org/docs/guides/security-policy-for-authors.html
 
 # How to Report a Security Vulnerability
 
-Security vulnerabilities can be reported via the project GitHub
-repository [Security Advisories](https://github.com/robrwo/Linux-Statm-Tiny/security/advisories).
+Security vulnerabilities can be reported to the current Linux-Statm-Tiny
+maintainers via the project
+[Security Advisories](https://github.com/robrwo/Linux-Statm-Tiny/security/advisories).
 
 Please include as many details as possible, including code samples
 or test cases, so that we can reproduce the issue.  Check that your
@@ -40,7 +44,7 @@ on the CPANSec website.
 The maintainer(s) aim to acknowledge your security report as soon as
 possible.  However, this project is maintained by a single person in
 their spare time, and they cannot guarantee a rapid response.  If you
-have not received a response from them within one week, then
+have not received a response from them within 2 weeks, then
 please send a reminder to them and copy the report to CPANSec at
 <cpan-security@security.metacpan.org>.
 
@@ -59,13 +63,16 @@ They may also forward this issue to CPANSec.
 
 Any security vulnerabilities in Linux-Statm-Tiny are covered by this policy.
 
+Security vulnerabilities in versions of any libraries that are
+included in Linux-Statm-Tiny are also covered by this policy.
+
 Security vulnerabilities are considered anything that allows users
 to execute unauthorised code, access unauthorised resources, or to
 have an adverse impact on accessibility or performance of a system.
 
-Security vulnerabilities in upstream software (embedded libraries,
-prerequisite modules or system libraries, or in Perl), are not
-covered by this policy unless they affect Linux-Statm-Tiny, or Linux-Statm-Tiny can
+Security vulnerabilities in upstream software (prerequisite modules
+or system libraries, or in Perl), are not covered by this policy
+unless they affect Linux-Statm-Tiny, or Linux-Statm-Tiny can
 be used to exploit vulnerabilities in them.
 
 Security vulnerabilities in downstream software (any software that
@@ -74,8 +81,13 @@ Linux-Statm-Tiny distribution) are not covered by this policy.
 
 ## Supported Versions of Linux-Statm-Tiny
 
-The maintainer(s) will only commit to releasing security fixes for the
-latest version of Linux-Statm-Tiny.
+The maintainer(s) will only commit to releasing security fixes for
+the latest version of Linux-Statm-Tiny.
+
+Note that the Linux-Statm-Tiny project only supports major versions of Perl
+released in the past 10 years, even though Linux-Statm-Tiny will run on
+older versions of Perl.  If a security fix requires us to increase
+the minimum version of Perl that is supported, then we may do so.
 
 # Installation and Usage Issues
 
